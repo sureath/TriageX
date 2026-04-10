@@ -1,84 +1,75 @@
-body {
-  margin: 0;
-  font-family: 'Cairo', sans-serif;
-  background: #0b1220;
-  color: #e5e7eb;
+let data = {};
+
+let selectedArea = null;
+let selectedPain = null;
+let selectedDuration = null;
+
+// اختيار الجسم
+document.querySelectorAll(".part").forEach(el => {
+  el.addEventListener("click", () => {
+
+    document.querySelectorAll(".part").forEach(p => p.classList.remove("active"));
+    el.classList.add("active");
+
+    selectedArea = el.dataset.area;
+
+    document.getElementById("questions").classList.remove("hidden");
+  });
+});
+
+// نوع الألم
+document.querySelectorAll("[data-pain]").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    document.querySelectorAll("[data-pain]").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+
+    selectedPain = btn.dataset.pain;
+    analyze();
+  });
+});
+
+// مدة الألم
+document.querySelectorAll("[data-duration]").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    document.querySelectorAll("[data-duration]").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+
+    selectedDuration = btn.dataset.duration;
+    analyze();
+  });
+});
+
+function analyze() {
+
+  let severity = document.getElementById("severity").value;
+
+  let result = document.getElementById("result");
+
+  let diagnosis = "إجهاد بسيط";
+  let color = "#22c55e";
+
+  if (severity > 7 || selectedDuration === "long") {
+    diagnosis = "حالة متقدمة تحتاج متابعة";
+    color = "#ef4444";
+  }
+
+  result.innerHTML = `
+  <h2 style="color:${color}">${diagnosis}</h2>
+  <p>بناءً على اختيارك لموقع الألم ونوعه ومدته.</p>
+  <p>النصيحة: راحة + متابعة الحالة.</p>
+  `;
+
+  result.classList.remove("hidden");
 }
 
-.app {
-  text-align: center;
-  padding: 25px;
-}
-
-h1 {
-  font-size: 28px;
-}
-
-.subtitle {
-  color: #9ca3af;
-}
-
-.body {
-  width: 220px;
-  margin-top: 20px;
-}
-
-.part {
-  fill: #1f2937;
-  stroke: #374151;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.part:hover {
-  fill: #3b82f6;
-}
-
-.part.active {
-  fill: #3b82f6;
-}
-
-.card {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 14px;
-  background: #111827;
-  animation: fade 0.4s;
-}
-
-.options button {
-  margin: 8px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  border: none;
-  background: #1f2937;
-  color: white;
-  cursor: pointer;
-}
-
-.options button.selected {
-  background: #3b82f6;
-}
-
-.follow {
-  margin-top: 15px;
-  padding: 12px;
-  background: #22c55e;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-footer {
-  margin-top: 30px;
-  color: #6b7280;
-}
-
-@keyframes fade {
-  from {opacity: 0;}
-  to {opacity: 1;}
+// متابعة
+function followUp() {
+  let answer = prompt("هل تحسنت؟");
+  if (answer === "لا") {
+    alert("يفضل مراجعة مختص");
+  } else {
+    alert("استمر بنفس العناية");
+  }
 }
