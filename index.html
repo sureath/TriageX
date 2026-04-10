@@ -4,12 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Health AI Agent</title>
+<title>خريطة الألم</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
-<script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
@@ -17,15 +15,13 @@
 
 <div class="app">
 
-<header>
-<h1>Health AI Agent</h1>
-<p>Interactive Intelligent Diagnosis System</p>
-</header>
+<h1>خريطة الألم</h1>
+<p class="subtitle">اضغط على مكان الألم في جسمك</p>
 
-<!-- 🔥 جسم -->
+<!-- 👇 الجسم -->
 <div class="body-wrapper">
 
-<svg viewBox="0 0 200 400" class="body-svg">
+<svg viewBox="0 0 200 400" class="body">
 
 <circle cx="100" cy="40" r="18" class="part" data-area="head"/>
 <rect x="85" y="60" width="30" height="100" class="part" data-area="back"/>
@@ -36,39 +32,37 @@
 
 </div>
 
-<!-- 🔥 الأسئلة -->
+<!-- 👇 الأسئلة -->
 <div id="questions" class="card hidden">
 
-<h3>Describe Pain Type</h3>
+<h3>وش نوع الألم؟</h3>
 <div class="options">
-<button data-pain="tight">Tight</button>
-<button data-pain="sharp">Sharp</button>
-<button data-pain="pulse">Pulsating</button>
+<button data-pain="tight">شد</button>
+<button data-pain="sharp">وخز</button>
+<button data-pain="pulse">نابض</button>
 </div>
 
-<h3>Severity</h3>
+<h3>قوة الألم</h3>
 <input type="range" min="1" max="10" id="severity">
 
-<h3>Duration</h3>
-<select id="duration">
-<option value="short">Less than 1 day</option>
-<option value="medium">1-3 days</option>
-<option value="long">More than 3 days</option>
-</select>
+<h3>مدة الألم</h3>
+<div class="options">
+<button data-duration="short">أقل من يوم</button>
+<button data-duration="medium">1-3 أيام</button>
+<button data-duration="long">أكثر من 3 أيام</button>
+</div>
 
 </div>
 
-<!-- 🔥 النتيجة -->
-<div id="result" class="card result hidden"></div>
+<!-- 👇 النتيجة -->
+<div id="result" class="card hidden"></div>
 
-<button class="follow" onclick="followUp()">Follow Up</button>
+<button class="follow" onclick="followUp()">متابعة حالتي</button>
 
 <footer>Programmer: Atheer</footer>
 
 </div>
 
 <script src="script.js"></script>
-<script>lucide.createIcons();</script>
-
 </body>
 </html>
